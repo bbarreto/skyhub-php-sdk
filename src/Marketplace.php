@@ -51,6 +51,16 @@ class Marketplace {
 		return $attributes;
 	}
 
+	public function queue($id=null) {
+		$queue = new Resources\Queue($this);
+
+		if (!is_null($id)):
+			$queue->setId($id);
+		endif;
+
+		return $queue;
+	}
+
 	public function saleSystems() {
 		return $this->apiCall('GET', '/sale_systems');
 	}
