@@ -8,7 +8,9 @@ class Marketplace {
 
 	public function __construct() {
 		$this->conf = (object) [
-			'endpoint'=>'https://api.skyhub.com.br'
+			'endpoint'=>'https://api.skyhub.com.br',
+			'email'=>null,
+			'senha'=>null
 		];
 	}
 
