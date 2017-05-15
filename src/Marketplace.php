@@ -9,8 +9,10 @@ class Marketplace {
 	public function __construct() {
 		$this->conf = (object) [
 			'endpoint'=>'https://api.skyhub.com.br',
-			'email'=>null,
-			'senha'=>null
+			'auth'=> (object) [
+				'email'=>null,
+				'senha'=>null
+			]
 		];
 	}
 
@@ -27,6 +29,16 @@ class Marketplace {
 		endif;
 
 		return $products;
+	}
+
+	public function categories($id=null) {
+		$categories = new Resources\Categories($this);
+
+		if (!is_null($id)):
+			$categories->setId($id);
+		endif;
+
+		return $categories;
 	}
 
 	public function apiCall($type='GET', $uri='/', $data=[]) {
