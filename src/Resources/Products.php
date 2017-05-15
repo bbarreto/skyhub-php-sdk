@@ -12,7 +12,7 @@ class Products extends \Skyhub\Marketplace {
 	}
 
 	/**
-	 * Definir SKU padrão
+	 * Definir ID padrão
 	 * @param type $sku 
 	 * @return type
 	 */

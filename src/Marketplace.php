@@ -41,6 +41,16 @@ class Marketplace {
 		return $categories;
 	}
 
+	public function attributes($id=null) {
+		$attributes = new Resources\Attributes($this);
+
+		if (!is_null($id)):
+			$attributes->setId($id);
+		endif;
+
+		return $attributes;
+	}
+
 	public function apiCall($type='GET', $uri='/', $data=[]) {
 		$url = $this->conf->endpoint.$uri;
 		$opts = [

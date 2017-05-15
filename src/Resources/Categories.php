@@ -49,8 +49,8 @@ class Categories extends \Skyhub\Marketplace {
 	 * @param type $name Nova descrição
 	 * @return type
 	 */
-	public function update($code, $name) {
-		return $this->apiCall('PUT', '/categories/'.urlencode($code), [
+	public function update($name) {
+		return $this->apiCall('PUT', '/categories/'.urlencode($this->id), [
 			'category'=>[
 				'name'=>$name
 			]
@@ -59,11 +59,10 @@ class Categories extends \Skyhub\Marketplace {
 
 	/**
 	 * Apagar categoria
-	 * @param type $code ID da categoria
 	 * @return type
 	 */
-	public function delete($code) {
-		return $this->apiCall('DELETE', '/categories/'.urlencode($code));
+	public function delete() {
+		return $this->apiCall('DELETE', '/categories/'.urlencode($this->id));
 	}
 
 }
