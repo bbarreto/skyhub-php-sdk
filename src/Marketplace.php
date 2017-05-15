@@ -88,7 +88,7 @@ class Marketplace {
 
 		if (is_array($data) && $type=='GET'):
 			$url .= '?'.http_build_query($data);
-		else:
+		elseif (is_array($data)):
 			$opts['http']['content'] = json_encode($data);
 		endif;
 
@@ -121,6 +121,12 @@ class Marketplace {
 					break;
 				case 404:
 					return ['error'=>['code'=>404, 'message'=>'Objeto não encontrado.']];
+					break;
+				case 500:
+					return ['error'=>['code'=>500, 'message'=>'Erro interno na API SkyHub.']];
+					break;
+				case 502:
+					return ['error'=>['code'=>502, 'message'=>'API SkyHub indisponível.']];
 					break;
 			}
 

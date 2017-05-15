@@ -11,6 +11,11 @@ class Freights extends \Skyhub\Marketplace {
 	}
 
 	public function __set($var, $val) {
+
+		if ($var=='saleSystems')
+			$this->params['filters[sale_systems]'] = $val;
+			return;
+
 		$this->params[$this->fromCamelCase($var)] = $val;
 	}
 

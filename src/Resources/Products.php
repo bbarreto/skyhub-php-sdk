@@ -112,28 +112,21 @@ class Products extends \Skyhub\Marketplace {
 
 	}
 
-	/**
-	 * Adicionar variação a um produto
-	 * @param type $variation 
-	 * @return type
-	 */
-	public function addVariation($variation) {
-
-		if (is_null($this->sku))
-			return ['error'=>'Informe o SKU do produto para adicionar a variação'];
-
-		if (!is_array($variation))
-			return ['error'=>'Variação deve ser um array.'];
-
-		return $this->apiCall('POST', '/products/'.urlencode($this->sku).'/variations', ['variation'=>$variation]);
-		
-	}
-
 	public function urls($mktplace=null) {
 		if (is_null($mktplace))
 			return $this->apiCall('GET', '/products/urls');
 		else
 			return $this->apiCall('GET', '/products/urls/'.urlencode($mktplace));
+	}
+
+	public function variations($sku=null) {
+		
+		$variations = new Variations($this);
+		
+		if (!is_null($this->sku))
+			$variations->setSku($this->sku);
+
+		return $variations;
 	}
 
 }
