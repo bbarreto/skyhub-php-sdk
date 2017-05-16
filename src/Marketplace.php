@@ -21,14 +21,14 @@ class Marketplace {
 		$this->conf->auth->key = $key;
 	}
 
-	public function products($sku=null) {
-		$products = new Resources\Products($this);
+	public function attributes($id=null) {
+		$attributes = new Resources\Attributes($this);
 
-		if (!is_null($sku)):
-			$products->setSku($sku);
+		if (!is_null($id)):
+			$attributes->setId($id);
 		endif;
 
-		return $products;
+		return $attributes;
 	}
 
 	public function categories($id=null) {
@@ -41,14 +41,28 @@ class Marketplace {
 		return $categories;
 	}
 
-	public function attributes($id=null) {
-		$attributes = new Resources\Attributes($this);
+	public function freights() {
+		return new Resources\Freights($this);
+	}
+
+	public function orders($id=null) {
+		$orders = new Resources\Orders($this);
 
 		if (!is_null($id)):
-			$attributes->setId($id);
+			$orders->setId($id);
 		endif;
 
-		return $attributes;
+		return $orders;
+	}
+
+	public function products($sku=null) {
+		$products = new Resources\Products($this);
+
+		if (!is_null($sku)):
+			$products->setSku($sku);
+		endif;
+
+		return $products;
 	}
 
 	public function queue($id=null) {
@@ -61,6 +75,10 @@ class Marketplace {
 		return $queue;
 	}
 
+	public function saleSystems() {
+		return $this->apiCall('GET', '/sale_systems');
+	}
+
 	public function statuses($id=null) {
 		$statuses = new Resources\Statuses($this);
 
@@ -71,16 +89,8 @@ class Marketplace {
 		return $statuses;
 	}
 
-	public function saleSystems() {
-		return $this->apiCall('GET', '/sale_systems');
-	}
-
 	public function statusTypes() {
 		return $this->apiCall('GET', '/status_types');
-	}
-
-	public function freights() {
-		return new Resources\Freights($this);
 	}
 
 	public function apiCall($type='GET', $uri='/', $data=[]) {
@@ -151,6 +161,15 @@ class Marketplace {
 		}
 	}
 
+	protected function fromCamelCase($input) {
+		preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $input, $matches);
+		$ret = $matches[0];
+		foreach ($ret as &$match) {
+			$match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
+		}
+		return implode('_', $ret);
+	}
+
 	private function parseHeaders($headers) {
 	    $head = array();
 	    foreach($headers as $k=>$v):
@@ -164,15 +183,6 @@ class Marketplace {
 	        endif;
 	    endforeach;
 	    return $head;
-	}
-
-	protected function fromCamelCase($input) {
-		preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $input, $matches);
-		$ret = $matches[0];
-		foreach ($ret as &$match) {
-			$match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
-		}
-		return implode('_', $ret);
 	}
 
 }

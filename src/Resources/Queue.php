@@ -12,7 +12,7 @@ class Queue extends \Skyhub\Marketplace {
 
 	/**
 	 * Definir ID padrão
-	 * @param type $sku 
+	 * @param type $id 
 	 * @return type
 	 */
 	public function setId($id) {

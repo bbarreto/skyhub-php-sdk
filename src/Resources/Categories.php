@@ -12,8 +12,8 @@ class Categories extends \Skyhub\Marketplace {
 	}
 
 	/**
-	 * Definir SKU padrão
-	 * @param type $sku 
+	 * Definir ID padrão
+	 * @param type $id
 	 * @return type
 	 */
 	public function setId($id) {

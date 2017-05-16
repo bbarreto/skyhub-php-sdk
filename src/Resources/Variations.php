@@ -11,7 +11,7 @@ class Variations extends \Skyhub\Marketplace {
 	}
 
 	/**
-	 * Definir ID padrão
+	 * Definir SKU padrão
 	 * @param type $sku 
 	 * @return type
 	 */
