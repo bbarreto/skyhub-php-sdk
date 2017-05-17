@@ -9,9 +9,11 @@ class Marketplace {
 	public function __construct() {
 		$this->conf = (object) [
 			'endpoint'=>'https://api.skyhub.com.br',
+			'user_agent'=>'php-sdk',
 			'auth'=> (object) [
 				'email'=>null,
-				'senha'=>null
+				'senha'=>null,
+				'accountmanager'=>null
 			]
 		];
 	}
@@ -20,9 +22,17 @@ class Marketplace {
 		$this->conf->endpoint = $endpoint;
 	}
 
+	public function setUserAgent($ua) {
+		$this->conf->user_agent = $ua;
+	}
+
 	public function setAuth($email, $key) {
 		$this->conf->auth->email = $email;
 		$this->conf->auth->key = $key;
+	}
+
+	public function setAccountManager($id) {
+		$this->conf->auth->accountmanager = $id;
 	}
 
 	public function attributes($id=null) {
@@ -105,10 +115,15 @@ class Marketplace {
 		        "ignore_errors"=>true,
 		        "header" => "Content-type: application/json\r\n".
 		        			"Accept: application/json\r\n".
+		        			"User-Agent: {$this->conf->user_agent}\r\n".
 						    "X-Api-Key: {$this->conf->auth->key}\r\n".
 						    "X-User-Email: {$this->conf->auth->email}"
 		    ]
 		];
+
+		if (!is_null($this->conf->auth->accountmanager)):
+			$opts['http']['header'] .= "\r\nX-AccountManager-key: {$this->conf->auth->accountmanager}";
+		endif;
 
 		if (is_array($data) && $type=='GET'):
 			$url .= '?'.http_build_query($data);
