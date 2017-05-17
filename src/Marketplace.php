@@ -16,6 +16,10 @@ class Marketplace {
 		];
 	}
 
+	public function setEndpoint($endpoint) {
+		$this->conf->endpoint = $endpoint;
+	}
+
 	public function setAuth($email, $key) {
 		$this->conf->auth->email = $email;
 		$this->conf->auth->key = $key;
