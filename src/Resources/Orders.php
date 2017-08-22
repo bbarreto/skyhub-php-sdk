@@ -18,6 +18,8 @@ class Orders extends \Skyhub\Marketplace {
 	 */
 	public function setId($id) {
 		$this->id = $id;
+		
+		return $this;
 	}
 
 	public function get($page=1, $per_page=25, $sale_system=null, $statuses=[]) {
