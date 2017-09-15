@@ -12,7 +12,7 @@ class Queue extends \Skyhub\Marketplace {
 
 	/**
 	 * Definir ID padrão
-	 * @param type $id 
+	 * @param type $id
 	 * @return type
 	 */
 	public function setId($id) {
@@ -20,8 +20,8 @@ class Queue extends \Skyhub\Marketplace {
 	}
 
 	/**
-	 * Recupera o primeiro pedido disponível na fila de integração. Após o processamento 
-	 * do pedido, o mesmo deve ser removido da fila de integração em até 5 minutos (ou 
+	 * Recupera o primeiro pedido disponível na fila de integração. Após o processamento
+	 * do pedido, o mesmo deve ser removido da fila de integração em até 5 minutos (ou
 	 * retornará para o início da fila)
 	 * @return type
 	 */
@@ -34,7 +34,7 @@ class Queue extends \Skyhub\Marketplace {
 	 * @return type
 	 */
 	public function delete() {
-		return $this->apiCall('DELETE', '/queues/orders/'.urlencode($this->id));
+		return $this->apiCall('DELETE', '/queues/orders/'.rawurlencode($this->id));
 	}
 
 }

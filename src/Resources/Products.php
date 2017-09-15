@@ -13,7 +13,7 @@ class Products extends \Skyhub\Marketplace {
 
 	/**
 	 * Definir SKU padrão
-	 * @param type $sku 
+	 * @param type $sku
 	 * @return type
 	 */
 	public function setSku($sku) {
@@ -46,8 +46,8 @@ class Products extends \Skyhub\Marketplace {
 
 	/**
 	 * Consultar um único produto a partir do SKU
-	 * @param type $sku 
-	 * @return type|array 
+	 * @param type $sku
+	 * @return type|array
 	 */
 	public function getBySku() {
 		if (is_null($this->sku))
@@ -73,7 +73,7 @@ class Products extends \Skyhub\Marketplace {
 
 	/**
 	 * Inserir produto
-	 * @param type $product 
+	 * @param type $product
 	 * @return type
 	 */
 	public function insert($product) {
@@ -87,7 +87,7 @@ class Products extends \Skyhub\Marketplace {
 
 	/**
 	 * Atualizar produto
-	 * @param type $product 
+	 * @param type $product
 	 * @return type
 	 */
 	public function update($product) {
@@ -95,7 +95,7 @@ class Products extends \Skyhub\Marketplace {
 		if (!is_array($product))
 			return ['error'=>'Produto deve ser um array.'];
 
-		return $this->apiCall('PUT', '/products/'.urlencode($this->sku), ['product'=>$product]);
+		return $this->apiCall('PUT', '/products/'.rawurlencode($this->sku), ['product'=>$product]);
 
 	}
 
@@ -108,7 +108,7 @@ class Products extends \Skyhub\Marketplace {
 		if (is_null($this->sku))
 			return ['error'=>'Informe o SKU do produto'];
 
-		return $this->apiCall('DELETE', '/products/'.urlencode($this->sku));
+		return $this->apiCall('DELETE', '/products/'.rawurlencode($this->sku));
 
 	}
 
@@ -116,13 +116,13 @@ class Products extends \Skyhub\Marketplace {
 		if (is_null($mktplace))
 			return $this->apiCall('GET', '/products/urls');
 		else
-			return $this->apiCall('GET', '/products/urls/'.urlencode($mktplace));
+			return $this->apiCall('GET', '/products/urls/'.rawurlencode($mktplace));
 	}
 
 	public function variations($sku=null) {
-		
+
 		$variations = new Variations($this);
-		
+
 		if (!is_null($this->sku))
 			$variations->setSku($this->sku);
 

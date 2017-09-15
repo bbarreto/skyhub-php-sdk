@@ -12,7 +12,7 @@ class Variations extends \Skyhub\Marketplace {
 
 	/**
 	 * Definir SKU padrão
-	 * @param type $sku 
+	 * @param type $sku
 	 * @return type
 	 */
 	public function setSku($sku) {
@@ -20,12 +20,12 @@ class Variations extends \Skyhub\Marketplace {
 	}
 
 	public function get() {
-		return $this->apiCall('GET', '/variations/'.urlencode($this->sku));
+		return $this->apiCall('GET', '/variations/'.rawurlencode($this->sku));
 	}
 
 	/**
 	 * Adicionar variação a um produto
-	 * @param type $variation 
+	 * @param type $variation
 	 * @return type
 	 */
 	public function insert($variation) {
@@ -36,8 +36,8 @@ class Variations extends \Skyhub\Marketplace {
 		if (!is_array($variation))
 			return ['error'=>'Variação deve ser um array.'];
 
-		return $this->apiCall('POST', '/products/'.urlencode($this->sku).'/variations', ['variation'=>$variation]);
-		
+		return $this->apiCall('POST', '/products/'.rawurlencode($this->sku).'/variations', ['variation'=>$variation]);
+
 	}
 
 	public function update($sku, $variation) {
@@ -46,11 +46,11 @@ class Variations extends \Skyhub\Marketplace {
 			return ['error'=>'Variação deve ser um array.'];
 
 		return $this->apiCall('PUT', '/variations/'.$sku, ['variation'=>$variation]);
-		
+
 	}
 
 	public function delete($sku) {
-		return $this->apiCall('DELETE', '/variations/'.urlencode($sku));
+		return $this->apiCall('DELETE', '/variations/'.rawurlencode($sku));
 	}
 
 }

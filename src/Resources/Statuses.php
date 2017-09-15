@@ -12,7 +12,7 @@ class Statuses extends \Skyhub\Marketplace {
 
 	/**
 	 * Definir ID padrão
-	 * @param type $id 
+	 * @param type $id
 	 * @return type
 	 */
 	public function setId($id) {
@@ -51,7 +51,7 @@ class Statuses extends \Skyhub\Marketplace {
 	 * @return type
 	 */
 	public function update($label, $type) {
-		return $this->apiCall('PUT', '/statuses/'.urlencode($this->id), [
+		return $this->apiCall('PUT', '/statuses/'.rawurlencode($this->id), [
 			'status'=>[
 				'label'=>$label,
 				'type'=>$type
@@ -64,7 +64,7 @@ class Statuses extends \Skyhub\Marketplace {
 	 * @return type
 	 */
 	public function delete() {
-		return $this->apiCall('DELETE', '/statuses/'.urlencode($this->id));
+		return $this->apiCall('DELETE', '/statuses/'.rawurlencode($this->id));
 	}
 
 }

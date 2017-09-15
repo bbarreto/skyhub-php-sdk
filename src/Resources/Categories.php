@@ -50,7 +50,7 @@ class Categories extends \Skyhub\Marketplace {
 	 * @return type
 	 */
 	public function update($name) {
-		return $this->apiCall('PUT', '/categories/'.urlencode($this->id), [
+		return $this->apiCall('PUT', '/categories/'.rawurlencode($this->id), [
 			'category'=>[
 				'name'=>$name
 			]
@@ -62,7 +62,7 @@ class Categories extends \Skyhub\Marketplace {
 	 * @return type
 	 */
 	public function delete() {
-		return $this->apiCall('DELETE', '/categories/'.urlencode($this->id));
+		return $this->apiCall('DELETE', '/categories/'.rawurlencode($this->id));
 	}
 
 }

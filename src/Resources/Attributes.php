@@ -13,7 +13,7 @@ class Attributes extends \Skyhub\Marketplace {
 
 	/**
 	 * Definir ID padrão
-	 * @param type $id 
+	 * @param type $id
 	 * @return type
 	 */
 	public function setId($id) {
@@ -37,7 +37,7 @@ class Attributes extends \Skyhub\Marketplace {
 	}
 
 	public function update($label, $options = []) {
-		return $this->apiCall('PUT', '/attributes/'.urlencode($this->id), [
+		return $this->apiCall('PUT', '/attributes/'.rawurlencode($this->id), [
 			'attribute'=>[
 				'label'=>$label,
 				'options'=>$options
