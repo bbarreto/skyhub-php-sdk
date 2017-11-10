@@ -12,7 +12,7 @@ class Marketplace {
 			'user_agent'=>'php-sdk',
 			'auth'=> (object) [
 				'email'=>null,
-				'senha'=>null,
+				'key'=>null,
 				'accountmanager'=>null
 			]
 		];
