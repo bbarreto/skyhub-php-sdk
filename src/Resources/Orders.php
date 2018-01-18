@@ -46,4 +46,12 @@ class Orders extends \Skyhub\Marketplace {
 		endif;
 		return $this->apiCall('GET', '/orders', $this->params);	
 	}
+
+	public function export()
+	{
+		$this->params = [
+			'exported'=>true
+		];
+		return $this->apiCall('PUT', '/orders/'.rawurlencode($this->id).'/exported', $this->params);
+	}
 }
