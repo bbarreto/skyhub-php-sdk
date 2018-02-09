@@ -68,4 +68,16 @@ class Orders extends \Skyhub\Marketplace {
 		return $this->apiCall('POST', '/orders/'.rawurlencode($this->id).'/invoice', $invoice);
 	}
 
+	/**
+	 * Enviar informações de shipments
+	 * @param array $invoice
+	 * @return type
+	 */
+	public function shipments($shipments) {
+
+		if (!is_array($shipments))
+			return ['error'=>'Shipments deve ser um array.'];
+
+		return $this->apiCall('POST', '/orders/'.rawurlencode($this->id).'/shipments', $shipments);
+	}
 }
