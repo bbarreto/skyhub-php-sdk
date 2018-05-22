@@ -1,5 +1,11 @@
 # SkyHub PHP SDK
 
+## Instalação via composer
+
+``` bash
+composer require bbarreto/skyhub-php-sdk
+```
+
 ## Autenticando a SDK
 
 ``` php
@@ -27,4 +33,5 @@ $produto = $skyhub->products()->insert([
 $produtos = $skyhub->products()->get(1, 10);
 ```
 
-[Referência de produtos](https://github.com/bbarreto/skyhub-php-sdk/wiki/Produtos/)
+
+Consulte todos os métodos na Wiki do projeto: https://github.com/bbarreto/skyhub-php-sdk/wiki
