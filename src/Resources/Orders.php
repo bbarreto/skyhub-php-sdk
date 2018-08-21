@@ -123,4 +123,20 @@ class Orders extends \Skyhub\Marketplace {
 
 		return ['error' => 'O pedido deve ser informado'];
 	}
+
+	/**
+	 * Informar uma exceção de transporte
+	 * @param array $status
+	 * @return type
+	 */
+	public function delivery_exception($data)
+	{
+		if (!is_array($data))
+			return ['error' => 'Detalhe deve ser um array.'];
+
+		if (isset($this->id) && !is_null($this->id))
+			return $this->apiCall('POST', '/orders/' . rawurlencode($this->id) . '/shipment_exception', $status);
+
+		return ['error' => 'O pedido deve ser informado'];
+	}
 }
