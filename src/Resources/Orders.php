@@ -25,7 +25,7 @@ class Orders extends \Skyhub\Marketplace {
 	public function get($page=1, $per_page=25, $sale_system=null, $statuses=[]) {
 
 		if (isset($this->id) && !is_null($this->id))
-			return $this->apiCall('GET', '/orders/'.urlencode($this->id));
+			return $this->apiCall('GET', '/orders/'.rawurlencode($this->id));
 
 		$this->params = [
 			'page'=>$page,
