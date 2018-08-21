@@ -107,14 +107,14 @@ class Marketplace {
 		return $this->apiCall('GET', '/status_types');
 	}
 
-	public function apiCall($type='GET', $uri='/', $data=[]) {
+	public function apiCall($type='GET', $uri='/', $data=[], $content_type = 'application/json') {
 		$url = $this->conf->endpoint.$uri;
 		$opts = [
 		    "http" => [
 		        "method" => $type,
 		        "ignore_errors"=>true,
-		        "header" => "Content-type: application/json\r\n".
-		        			"Accept: application/json\r\n".
+		        "header" => "Content-type: $content_type\r\n".
+		        			"Accept: $content_type\r\n".
 		        			"User-Agent: {$this->conf->user_agent}\r\n".
 						    "X-Api-Key: {$this->conf->auth->key}\r\n".
 						    "X-User-Email: {$this->conf->auth->email}"
