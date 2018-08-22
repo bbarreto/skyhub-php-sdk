@@ -80,4 +80,63 @@ class Orders extends \Skyhub\Marketplace {
 
 		return $this->apiCall('POST', '/orders/'.rawurlencode($this->id).'/shipments', $shipments);
 	}
+
+	/**
+	 * Obter as etiquetas de envio do pedido em formato json 
+	 * @return type
+	 */
+	public function shipment_labels()
+	{
+		if (isset($this->id) && !is_null($this->id))
+			return $this->apiCall('GET', '/orders/' . rawurlencode($this->id) . '/shipment_labels');
+
+		return ['error' => 'O pedido deve ser informado'];
+	}
+
+	/**
+	 * Cancelar um pedido
+	 * @param array $status
+	 * @return type
+	 */
+	public function cancel($status) {
+
+		if (!is_array($status))
+			return ['error'=>'Status deve ser um array.'];
+			
+		if (isset($this->id) && !is_null($this->id))
+			return $this->apiCall('POST', '/orders/' . rawurlencode($this->id) . '/cancel', $status);
+
+		return ['error' => 'O pedido deve ser informado'];
+	}
+
+	/**
+	 * Informar a entrega do pedido
+	 * @param array $status
+	 * @return type
+	 */
+	public function delivery($status) {
+		if (!is_array($status))
+			return ['error' => 'Status deve ser um array.'];
+
+		if (isset($this->id) && !is_null($this->id))
+			return $this->apiCall('POST', '/orders/' . rawurlencode($this->id) . '/delivery', $status);
+
+		return ['error' => 'O pedido deve ser informado'];
+	}
+
+	/**
+	 * Informar uma exceção de transporte
+	 * @param array $status
+	 * @return type
+	 */
+	public function delivery_exception($data)
+	{
+		if (!is_array($data))
+			return ['error' => 'Detalhe deve ser um array.'];
+
+		if (isset($this->id) && !is_null($this->id))
+			return $this->apiCall('POST', '/orders/' . rawurlencode($this->id) . '/shipment_exception', $status);
+
+		return ['error' => 'O pedido deve ser informado'];
+	}
 }
